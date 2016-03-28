@@ -1,0 +1,16 @@
+[
+		{
+		"NameTest": "Check zamena linz",
+		 "Url":"/zamena-linz/", 
+		 "Host":"www.optix.su", 
+		 "StatusCode":200, 
+		 "SubString":"замену линз"
+		},
+        {
+		"NameTest":"Главная optix.su",
+		"Url":"/", 
+		"Host":"www.optix.su", 
+		"StatusCode":500, 
+		"SubString":""
+		}
+]
