@@ -54,7 +54,6 @@ func checkURL(ip string, uri TReq) bool {
 	buffer.WriteString("http://")
 	buffer.WriteString(ip)
 	buffer.WriteString(uri.Url)
-	//fmt.Println("URL: " + buffer.String())
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", buffer.String(), nil)
 	req.Host = uri.Host
@@ -78,16 +77,17 @@ func checkURL(ip string, uri TReq) bool {
 func main() {
 	ipPtr := flag.String("ip", "127.0.0.1", "webserver's ip address")
 	filePtr := flag.String("f", "ssv4.json", "filename with test")
-	verbosePtr := flag.Bool("v", false, "verbose mode: show html page")
+	verbosePtr := flag.Bool("v", false, "verbose mode: save html pages to files")
 	flag.Parse()
 	verbose = *verbosePtr
 	readfile(*filePtr)
 	for index, element := range tests {
 		if checkURL(*ipPtr, element) {
-			fmt.Println("Test#" + strconv.Itoa(index) + ": " + element.NameTest + " is TRUE")
+			fmt.Println("Test#" + strconv.Itoa(index) + ": " + element.NameTest + "  ... Pass")
 		} else {
-			fmt.Println("Test#" + strconv.Itoa(index) + ": " + element.NameTest + " is FALSE")
+			fmt.Println("Test#" + strconv.Itoa(index) + ": " + element.NameTest + "  ... Failure")
 			exitCode = 1
+			os.Exit(exitCode)
 		}
 	}
 	os.Exit(exitCode)
